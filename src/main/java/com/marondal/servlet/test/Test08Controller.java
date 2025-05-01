@@ -50,8 +50,6 @@ public class Test08Controller extends HttpServlet {
 		}
 		
 		
-		
-		
 		out.println(""
 				+ "		</body>\n"
 				+ "</html>");
