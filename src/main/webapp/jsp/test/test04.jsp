@@ -10,34 +10,37 @@
 <body>
 
 	<%
-		int num1 = Integer.parseInt(request.getParameter("number1"));
-		int num2 = Integer.parseInt(request.getParameter("number2"));
+		// 전달 받은 값이 두개의 수 / 사칙연상 중 하나
+		// request 로 부터 Parameter
+		int number1 = Integer.parseInt(request.getParameter("number1"));
+		int number2 = Integer.parseInt(request.getParameter("number2"));
+		
+		// + , - , X , ÷
+		// 4개중에 하나를 전달받아야함.
+		
 		String operator = request.getParameter("operator");
 		
-		double result = 0;
+		// 결과물
 		
-		switch (operator) {
-				case "+":
-					result = num1 + num2;
-					break;
-				case "-":
-					result = num1 - num2;
-					break;
-				case "*":
-					result = num1 * num2;
-					break;
-				case "/":
-					result = (double) num1 / num2;
-					break;
+		double result=0;
 		
+		if(operator.equals("+")) {
+			result = number1 + number2;
+		} else if(operator.equals("-")) {
+			result = number1 - number2;
+		} else if(operator.equals("X")) {
+			result = number1 * number2;
+		} else {
+			result = number1 / (double)number2;
 		}
+		
 		
 	%>
 	
 	
 	<div class="container">
 		<h2>계산 결과</h2>
-		<div class="display-4 mt-2"><%=num1 %> <%=operator %> <%=num2 %> = <%=result %></div>
+		<div class="display-4"><%=number1 %> <%=operator %> <%=number2 %> = <span class="text-primary"><%=result %></span></div>
 	</div>
 
 

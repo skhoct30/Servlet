@@ -12,16 +12,20 @@
 	<div class="container">
 	
 		<h2>사칙 연산</h2>
+		
+		
 		<form method="post" action="/jsp/test/test04.jsp">
-		<input type="text" name="num1">
-		<select name="operator">
-			<option value="+">+</option>
-			<option value="-">-</option>			
-			<option value="*">X</option>
-			<option value="/">%</option>
-		</select>
-		<input type="text" name="num2">
-		<button type="submit" class="btn btn-info">계산</button>
+			<div class="d-flex">
+				<input type="text" name="number1" class="form-control col-2">
+				<select name="operator" class="form-control col-1 mx-2">
+					<option>+</option>
+					<option>-</option>			
+					<option>X</option>
+					<option>÷</option>
+				</select>
+				<input type="text" name="number2" class="form-control col-2">
+				<button type="submit" class="btn btn-info ml-3">계산</button>
+			</div>
 		</form>
 
 	</div>
