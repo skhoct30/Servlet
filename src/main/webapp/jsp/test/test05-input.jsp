@@ -13,7 +13,7 @@
 		
 		<form method="post" action="/jsp/test/test05.jsp">
 			<div class="d-flex align-items-end">
-				<input type="text" class="form-control col-2">
+				<input type="text" class="form-control col-2" name="cm">
 				<div>cm</div>
 			</div>
 			
