@@ -18,7 +18,36 @@
 		String[] units = request.getParameterValues("unit");
 		
 		//반복문 전에 빈 놈 하나 만들기
+		
 		String result = "";
+		
+		for(int i = 0; i < units.length;i++) {
+			if(units[i].equals("inch")) {
+				double inch = cm * 0.39;
+				result += inch + "in<br>";
+			} else if(units[i].equals("feet")) {
+				double feet = cm * 0.032808399;
+				result += feet + "ft<br>";
+			} else if(units[i].equals("yard")) {
+				double yard = cm * 0.010936133;
+				result += yard + "yd<br>";				
+			} else {
+				double meter = cm / 100.0;
+				result += meter + "m<br>";
+			}
+		}
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+/* 		String result = "";
 		
 		for(int i = 0; i < units.length;i++) {
 			if(units[i].equals("inch")) {
@@ -34,7 +63,7 @@
 				double meter = cm / 100.0;
 				result += meter + "m<br>";
 			}
-		}
+		} */
 		
 		
 		

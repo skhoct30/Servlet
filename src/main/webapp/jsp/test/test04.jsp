@@ -22,12 +22,12 @@
 		
 		// 결과물
 		
-		double result=0;
+		double result = 0;
 		
 		if(operator.equals("+")) {
 			result = number1 + number2;
 		} else if(operator.equals("-")) {
-			result = number1 - number2;
+			result = number1 - number2;			
 		} else if(operator.equals("X")) {
 			result = number1 * number2;
 		} else {
