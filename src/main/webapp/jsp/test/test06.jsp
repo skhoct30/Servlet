@@ -11,29 +11,38 @@
 <body>
 
 
+
 	<%
 		List<String> goodsList = Arrays.asList(new String[]{
 		    "저지방 우유", "요플레 4개", "딸기 1팩", "삼겹살 300g", "생수 6개", "주방 세제"
 		});
 	
 	
-		
-	
-	
+		int sum = 0;
 	
 	
 	%>
 	
 	<div class="container">
-		<div class="d-flex justify-content-center">
-			<h3>장 목록</h3>
-		</div>
-		<header class="d-flex">
-			<div class="col-4 justify-content-center">번호</div>
-			<div class="col-8 justify-content-center">품목</div>
-		</header>
+		<h2 class="text-center">장 목록</h2>
 		
-		<section></section>
+		<table class="table text-center">
+			<thead>
+				<tr>
+					<th>번호</th>
+					<th>품목</th>
+				</tr>	
+			</thead>
+			<tbody>
+				<% for(int i = 0; i < goodsList.size();i++) { %>
+				<tr>
+					<td><%= i + 1 %></td>
+					<td><%= goodsList.get(i) %></td>
+				</tr>
+				<% } %>
+			</tbody>
+			
+		</table>
 	
 	</div>
 </body>
