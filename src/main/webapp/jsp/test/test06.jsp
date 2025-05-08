@@ -16,11 +16,7 @@
 		List<String> goodsList = Arrays.asList(new String[]{
 		    "저지방 우유", "요플레 4개", "딸기 1팩", "삼겹살 300g", "생수 6개", "주방 세제"
 		});
-	
-	
-		int sum = 0;
-	
-	
+
 	%>
 	
 	<div class="container">
