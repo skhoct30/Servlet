@@ -73,7 +73,7 @@
 				<tr>
 					<td class="col-2"><%= bookList.get("id") %></td>
 					<td class="col-2"> <img src="<%= bookList.get("image") %>" alt="아몬드" width="100"> </td>
-					<td class="col-8 display-4 text-primary"><%= bookList.get("title") %></td>
+					<td class="col-8 display-4 text-primary"><a href="http://localhost:8080/jsp/test/test08-input.jsp"><%= bookList.get("title") %></a></td>
 				</tr>
 				<% } %>
 			</tbody>
