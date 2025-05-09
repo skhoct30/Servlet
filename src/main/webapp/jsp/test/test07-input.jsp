@@ -11,7 +11,10 @@
 	<div class="container">
 		<h2>메뉴검색</h2>
 		<form method="post" action="/jsp/test/test07.jsp">
-			<input type="text" name="search" class="form-control col-3"><input type="checkbox" name="checker"><label>4점 이하 제외</label><br>
+			<div class="d-flex">
+				<input type="text" name="search" class="form-control col-3">
+				<input type="checkbox" name="filter"><label>4점 이하 제외</label>
+			</div>
 			<button type="submit" class="mt-3 btn btn-success">검색</button>
 		</form>
 	

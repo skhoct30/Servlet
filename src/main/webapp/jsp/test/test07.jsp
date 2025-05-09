@@ -28,7 +28,7 @@
 	
 	    
 	    String target = request.getParameter("search");
- 		String ckecked = request.getParameter("ckecked");
+ 		String filter = request.getParameter("filter");
 	    
 	    
 	    
@@ -49,8 +49,11 @@
 				<% for(Map<String, Object> item:list) {
 						String menu = (String)item.get("menu"); // 앞에 (String) 넣은건 오브젝트를 다운캐스팅해서 스트링으로 변환 시키는거.
 						double point = (double)item.get("point");
-						
-						if(menu.equals(target)) {
+						//filter 가 null 이면..
+						//filter가 'on'이면 point가 4 이상인 경우
+						// 메뉴가 일치하면서 필터가 null 이거나!!(또는 ||) 필터가 켜져있고 포인트가 4.0 이상일때
+						// 앞에 필터가 null 이 아니면 on이 이미 체크 되어 있는 상태니까 filter.equals("on") && 빼도됨
+						if(menu.equals(target) && (filter == null || point >= 4.0)) {
 				%>
 				<tr>
 					<td><%= item.get("menu") %></td>

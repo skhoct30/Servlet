@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ page import="java.util.*" %>
+<%@ page import="java.util.*" %>    
 <!DOCTYPE html>
 <html>
 <head>
@@ -54,35 +54,35 @@
 	        } 
 	    };
 	    list.add(map);
+	
+	    
+	    int id = Integer.parseInt(request.getParameter("id"));
 
+	
 	%>
-
+	
+	
+	
+	
 	<div class="container">
-		<h2 class="text-center">책 목록</h2>
-		
-		<table class="table text-center">
-			<thead>
-				<tr>
-					<th class="col-2">id</th>
-					<th class="col-2">표지</th>
-					<th class="col-8">제목</th>
-				</tr>
-			</thead>
-			<tbody>
-				<% for(Map<String, Object> bookList:list) { %>
-				<tr>
-					<td class="col-2"><%= bookList.get("id") %></td>
-					<td class="col-2"> <img src="<%= bookList.get("image") %>" alt="아몬드" width="100"> </td>
-					<td class="col-8 display-4 text-primary"><a href="/jsp/test/test08-detail.jsp?id=<%= bookList.get("id") %>"><%= bookList.get("title") %></a></td>
-				</tr>
-				<% } %>
-			</tbody>
-		</table>
-		
+		<% for(Map<String, Object> bookList:list) { 
+			int bookId = (Integer)bookList.get("id");
+			if(bookId == id) {
+		%>
+		<div class="d-flex">
+			<div>
+				<img src="<%= bookList.get("image") %>">
+			</div>
+			<div>
+				<div class="display-1 font-weight-bold"><%= bookList.get("title") %></div>
+				<div class="display-1 text-info"><%= bookList.get("author") %></div>
+				<div class="display-4"><%= bookList.get("publisher") %></div>
+			</div>
+		</div>
+		<% }
+		} %>
+	
 	</div>
-
-
-
 
 </body>
 </html>
