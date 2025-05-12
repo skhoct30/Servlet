@@ -111,7 +111,7 @@
 			</div>
 			
 			<div class="search col-10 d-flex align-items-center">
-				<form method="get" action="jsp/test/test10/test10-detail.jsp" class="w-100"> <!-- form 태그가 화면을 줄이니까 최대한 넓게 뽑아주자 w-100 % -->
+				<form method="get" action="/jsp/test/test10/test10-detail.jsp" class="w-100"> <!-- form 태그가 화면을 줄이니까 최대한 넓게 뽑아주자 w-100 % -->
 					<div class="input-group col-5">
 						<input type="text" class="form-control" name="title">
 						<div class="input-group-append">
@@ -146,6 +146,11 @@
 					
 					if((idString !=null && id == (Integer)list.get("id"))
 						|| (title !=null && title.equals(list.get("title")))) {
+					
+							
+						
+						
+					
 						int time = (Integer)list.get("time");
 				%>
 			<div class="artist d-flex border border-success p-3">
