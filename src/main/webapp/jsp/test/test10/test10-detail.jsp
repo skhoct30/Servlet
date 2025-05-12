@@ -91,7 +91,7 @@
 	    musicList.add(musicInfo);	
 	
 	    
-	    int id= Integer.parseInt(request.getParameter("id"));
+	    int id = Integer.parseInt(request.getParameter("id"));
 	
 	%>
 	
@@ -117,40 +117,45 @@
 			</div>
 		</header>
 		
-		<nav class="nav">
-			<ul class="nav nav-fill">
-				<li class="nav-item"><a href="#" class="nav-link text-dark font-weight-bold">멜롱차트</a></li>
-				<li class="nav-item"><a href="#" class="nav-link text-dark font-weight-bold">최신음악</a></li>
-				<li class="nav-item"><a href="#" class="nav-link text-dark font-weight-bold">장르음악</a></li>
-				<li class="nav-item"><a href="#" class="nav-link text-dark font-weight-bold">멜론DJ</a></li>
-				<li class="nav-item"><a href="#" class="nav-link text-dark font-weight-bold">뮤직어워드</a></li>
+		<nav class="main-menu">
+			<ul class="nav font-weight-bold">
+				<li class="nav-item"><a href="#" class="nav-link text-dark">멜롱차트</a></li>
+				<li class="nav-item"><a href="#" class="nav-link text-dark">최신음악</a></li>
+				<li class="nav-item"><a href="#" class="nav-link text-dark">장르음악</a></li>
+				<li class="nav-item"><a href="#" class="nav-link text-dark">멜론DJ</a></li>
+				<li class="nav-item"><a href="#" class="nav-link text-dark">뮤직어워드</a></li>
 			</ul>
 		</nav>
 		
-		<span class="d-flex border border-success border-5 p-3">
-			<% for(Map<String, Object> list:musicList) { 
-				int musicId = (Integer)list.get("id");
-				if(musicId == id) {
-			%>
-			<img class="col-md-2" src="<%= list.get("thumbnail") %>">
-			<div>
-				<h1><small><%= list.get("title") %></small></h1>
-				<h6 class="text-success">아이유</h6>
-				<div class="d-flex flex-column">
-					<div>앨범</div>
-					<div>재생시간</div>
-					<div>작곡가</div>
-					<div>작사가</div>
-				</div>	
+		<section class="contents mt-3">
+			<h3>곡 정보</h3>
+				<% for(Map<String, Object> list:musicList) { 
+					int musicId = (Integer)list.get("id");
+					if(musicId == id) {
+						int time = (Integer)list.get("time");
+				%>
+			<div class="artist d-flex border border-success p-3">
+				<div>
+					<img width="200" src="<%= list.get("thumbnail") %>">
+				</div>
+				<div class="ml-3">
+					<div class="display-4"><%= list.get("title") %></div>
+					<div class="text-success font-weight-bold mt-2"><%= list.get("singer") %></div>
+					<div class="small mt-1">앨범 <%= list.get("title") %></div>
+					<div class="small">재생시간 <%= time / 60 %> : <%= time % 60 %></div>
+					<div class="small">작곡가 <%= list.get("composer") %></div>
+					<div class="small">작사가 <%= list.get("lyricist") %></div>
+				</div>
+				<% }
+				}%>
 			</div>
-			<% }
-			}%>
-		</span>
-				
-		<section class="mt-5">
-			<h4>가사</h4>
-			<hr>
-			<div class="text-secondary">가사 정보 없음</div>			
+			
+			<div class="song-list mt-5">
+				<h3>가사</h3>
+				<hr>
+				<div>가사 정보 없음</div>
+			</div>
+		
 		</section>
 		
 		<hr>
