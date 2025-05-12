@@ -91,8 +91,8 @@
 	    musicList.add(musicInfo);	
 	
 	
-		
-	    
+		String title = request.getParameter("title");
+
 	    
 
 	%>
@@ -108,18 +108,24 @@
 	
 	<div id="wrap" class="container">
 		<header class="d-flex">
+		
 			<div class="logo col-2 d-flex align-items-center">
 				<div class="text-success"><h2>Melong</h2></div>
 			</div>
+			
 			<div class="search col-10 d-flex align-items-center">
-				<div class="input-group col-5">
-					<input type="text" class="form-control">
-					<div class="input-group-append">
-						<button class="btn btn-success" type="button">검색</button>
+				<form method="get" action="/jsp/test/test10/test10-detail.jsp" class="w-100"> <!-- form 태그가 화면을 줄이니까 최대한 넓게 뽑아주자 w-100 % -->
+					<div class="input-group col-5">
+						<input type="text" class="form-control" name="title">
+						<div class="input-group-append">
+							<button class="btn btn-success" type="submit">검색</button>
+						</div>
 					</div>
-				</div>
+				</form>
 			</div>
+			
 		</header>
+
 		
 		<nav class="main-menu">
 			<ul class="nav font-weight-bold">
@@ -134,12 +140,12 @@
 		<section class="contents">
 			<div class="artist d-flex border border-success p-3">
 				<div>
-					<img width="200" src="https://musicmeta-phinf.pstatic.net/artist/000/112/112579.jpg?type=ff300_300">
+					<img width="150" src="https://musicmeta-phinf.pstatic.net/artist/000/112/112579.jpg?type=ff300_300">
 				</div>
 				
-				<div class="ml-3">
-					<h2><%= artistInfo.get("name") %></h2>
-					<div class="mt-3"><%= artistInfo.get("agency") %></div>
+				<div class="ml-3 mt-1">
+					<h3><%= artistInfo.get("name") %></h3>
+					<div class="mt-2"><%= artistInfo.get("agency") %></div>
 					<div><%= artistInfo.get("debute") %>년 데뷔</div>
 				</div>
 			</div>

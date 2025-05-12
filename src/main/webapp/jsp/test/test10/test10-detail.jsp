@@ -91,8 +91,9 @@
 	    musicList.add(musicInfo);	
 	
 	    
-	    int id = Integer.parseInt(request.getParameter("id"));
-	
+	    String idString = request.getParameter("id");
+		
+	    String title = request.getParameter("title");
 	%>
 	
 	
@@ -104,17 +105,22 @@
 	
 	<div id="wrap" class="container">
 		<header class="d-flex">
+		
 			<div class="logo col-2 d-flex align-items-center">
 				<div class="text-success"><h2>Melong</h2></div>
 			</div>
+			
 			<div class="search col-10 d-flex align-items-center">
-				<div class="input-group col-5">
-					<input type="text" class="form-control">
-					<div class="input-group-append">
-						<button class="btn btn-success" type="button">검색</button>
+				<form method="get" action="jsp/test/test10/test10-detail.jsp" class="w-100"> <!-- form 태그가 화면을 줄이니까 최대한 넓게 뽑아주자 w-100 % -->
+					<div class="input-group col-5">
+						<input type="text" class="form-control" name="title">
+						<div class="input-group-append">
+							<button class="btn btn-success" type="submit">검색</button>
+						</div>
 					</div>
-				</div>
+				</form>
 			</div>
+			
 		</header>
 		
 		<nav class="main-menu">
@@ -130,8 +136,16 @@
 		<section class="contents mt-3">
 			<h3>곡 정보</h3>
 				<% for(Map<String, Object> list:musicList) { 
-					int musicId = (Integer)list.get("id");
-					if(musicId == id) {
+					
+					// idString 이 null 이 아니면 id를 통한 비교
+					// title 이 null 이 아니면 title 을 통한 비교
+					int id = 0;
+					if(idString != null) {
+						id = Integer.parseInt(idString);
+					}
+					
+					if((idString !=null && id == (Integer)list.get("id"))
+						|| (title !=null && title.equals(list.get("title")))) {
 						int time = (Integer)list.get("time");
 				%>
 			<div class="artist d-flex border border-success p-3">
