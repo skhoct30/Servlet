@@ -13,12 +13,14 @@
 	
 	
 	<div class="container mt-3">
-		<h2>즐겨찾기 추가</h2>
-		<label>사이트명:</label>
-		<input type="text" class="col-3 form-control">
-		<label>사이트 주소:</label>
-		<input type="text" class="col-5 form-control">		
-		<button type="button" class="mt-3 btn btn-success">추가</button>
+		<form method="get" action="/db/test/testDB01">
+			<h2>즐겨찾기 추가</h2>
+			<label>사이트명:</label>
+			<input type="text" class="col-3 form-control" name="name">
+			<label>사이트 주소:</label>
+			<input type="text" class="col-5 form-control" name="url">		
+			<button type="submit" class="mt-3 btn btn-success">추가</button>
+		</form>
 	</div>
 	
 	
