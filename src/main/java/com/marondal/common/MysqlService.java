@@ -3,8 +3,13 @@ package com.marondal.common;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
+import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public class MysqlService {
 
@@ -13,6 +18,37 @@ public class MysqlService {
 
 	//데이터 베이스 접속 기능
 	private Connection connection;
+	
+	
+	// 아래 두개 코드
+	// 마이sql 에서 메소드를 호출하는 데 최초에 호출할 때  null  인 값이면 아래 if 문으로 들어가서 리턴값으로 돌려준다
+	
+	
+	
+	// 클래스를 설계한 입장에서
+	// 해당 클래스의 객체가 두개이상 만들어지지 않도록
+	// 하나의 객체를 공유해서 사용하게 한다.
+	// Singleton pattern : 
+	
+	// static 변수 : 객체 생성 없이 사용할 수 있는 멤버 변수
+	// [ private MysqlService mysqlService = null; ] 원래 이거였는데 static 붙혀서 static 변수로 변환
+	private static MysqlService mysqlService = null;
+	
+	
+	// 해당 클래스의 객체를 return 하는 메소드
+	// static 메소드 : 객체 생성없이 사용할 수 있는 메소드
+	// 객체 생성 없이 사용할 수 있는 메소드기 떄문에 객체 생성을 기반으로 만드는 것들에는 사용할 수 없다.
+	// 그중에 대표적인게 [ 멤버변수 ] // 객체 생성을 통해서 만들어지는 멤버변수는 사용 불가능이다.
+	// [ private MysqlService mysqlService = null; ] 얘는 멤버변수가 걸려있어서 사용불가
+	public static MysqlService getInstance() {
+		
+		if(mysqlService == null) {
+			mysqlService = new MysqlService();
+		}
+		
+		return mysqlService;
+	}
+	
 	
 	
 	//-----------------------------------------------------------------------------------------------------
@@ -53,7 +89,7 @@ public class MysqlService {
 	// 쿼리 수행 기능
 	// 조회 커리 수행
 	
-	public ResultSet select(String query) {
+	public List<Map<String, Object>> select(String query) {
 		
 		
 		Statement statement;
@@ -61,7 +97,37 @@ public class MysqlService {
 			statement = connection.createStatement();
 			ResultSet resultSet = statement.executeQuery(query);
 			
-			return resultSet;
+			// 조회 결과의 컬럼 목록
+			// resultSet 은 조회결과 getMataData 는
+			// 컬럼의 개수를 얻어옴.
+			ResultSetMetaData rsmd = resultSet.getMetaData();
+			
+			// 조회된 테이블의 컬럼 개수 확인
+			int columnCount = rsmd.getColumnCount();
+			
+			
+			// 컬럼 이름 리스트
+			List<String> columnList = new ArrayList<>();
+			for(int i = 1; i <= columnCount; i++) {
+				columnList.add(rsmd.getColumnName(i)); // 컬럼 이름과 개수를 얻어와서 리스트에 추가를 해둠.
+			}
+			
+			List<Map<String, Object>> resultList = new ArrayList<>();
+			while(resultSet.next()) {
+
+				Map<String, Object> row = new HashMap<>();
+				// 하나의 행에서 컬럼 이름으로 모든 값 얻어오기
+				// columnList에 있는 값을 하나하나 접근해서 얻어와야한다.
+				// column 에 컬럼이름이 들어있다.
+				for(String column:columnList) {
+					Object value = resultSet.getObject(column); // 컬럼이 int string array 등등 여러가지 가 있으니까 업케스팅 된 상태로 Object로 불러온다 
+					
+					row.put(column, value);
+				}
+				resultList.add(row);
+			}
+			statement.close();
+			return resultList;
 			
 		} catch (SQLException e) {
 
@@ -74,6 +140,29 @@ public class MysqlService {
 		
 		
 	}
+	
+	
+	// INSERT, UPDATE, DELETE
+	// 3가지 쿼리를 수행하는 기능을 합쳐서 만들기
+	// update() : 수정한다
+	public int update(String query) {
+		
+		Statement statement;
+		try {
+			statement = connection.createStatement();
+			int count = statement.executeUpdate(query);			
+			statement.close();
+			return count;
+			
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			
+			return -1;
+		} 
+	}
+	
 	
 	//-----------------------------------------------------------------------------------------------------
 	

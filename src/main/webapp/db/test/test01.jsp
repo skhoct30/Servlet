@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ page import="com.marondal.common.MysqlService" %>
-<%@ page import="java.sql.ResultSet" %>
+<%@ page import="java.util.*" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -15,7 +15,9 @@
 		MysqlService mysqlService = new MysqlService();
 	
 		mysqlService.connect();
-		ResultSet resultSet = mysqlService.select("SELECT * FROM `favorites`");
+		List<Map<String, Object>> favoriteList = mysqlService.select("SELECT * FROM `favorites`");
+		
+		mysqlService.disconnect();		
 	
 	%>
 	
@@ -29,12 +31,12 @@
 				</tr>
 			</thead>
 			<tbody>
-				<% while(resultSet.next()) { 
+				<% for(Map<String, Object> list:favoriteList) { 
 				
 				%>
 				<tr>
-					<td><%= resultSet.getString("name") %></td>
-					<td><a href="<%= resultSet.getString("url") %>"><%= resultSet.getString("url") %></a></td>
+					<td><%= list.get("name") %></td>
+					<td><a href="<%= list.get("url") %>"><%= list.get("url") %></a></td>
 				</tr>
 				<% } %>
 			</tbody>
