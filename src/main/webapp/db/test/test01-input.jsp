@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>즐겨찾기 추가</title>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
 </head>
 <body>
@@ -13,8 +13,9 @@
 	
 	
 	<div class="container mt-3">
-		<form method="get" action="/db/test/testDB01">
+		<form method="post" action="/db/test/testDB01"> <!-- action 주소는 기능을 사용하기 위한 class 주소.(WebServlet 에 적은 주소) -->
 			<h2>즐겨찾기 추가</h2>
+			
 			<label>사이트명:</label>
 			<input type="text" class="col-3 form-control" name="name">
 			<label>사이트 주소:</label>

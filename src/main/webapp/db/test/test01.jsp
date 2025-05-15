@@ -6,19 +6,21 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>즐겨찾기 목록</title>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
 </head>
 <body>
 
 	<%
-		MysqlService mysqlService = new MysqlService();
 	
+		MysqlService mysqlService = MysqlService.getInstance();
 		mysqlService.connect();
-		List<Map<String, Object>> favoriteList = mysqlService.select("SELECT * FROM `favorites`");
+		
+		String query = "SELECT * FROM `favorites` ORDER BY  `id` DESC";
+		List<Map<String, Object>> favoriteList = mysqlService.select(query);
+		
 		
 		mysqlService.disconnect();		
-	
 	%>
 	
 	
@@ -28,15 +30,18 @@
 				<tr>
 					<th>사이트</th>
 					<th>사이트 주소</th>
+					<th></th>
 				</tr>
 			</thead>
+
 			<tbody>
-				<% for(Map<String, Object> list:favoriteList) { 
+				<% for(Map<String, Object> favorite:favoriteList) { 
 				
 				%>
 				<tr>
-					<td><%= list.get("name") %></td>
-					<td><a href="<%= list.get("url") %>"><%= list.get("url") %></a></td>
+					<td><%= favorite.get("name") %></td>
+					<td><a href="<%= favorite.get("url") %>" target="_blank"><%= favorite.get("url") %></a></td>
+					<td><a href="/db/test/testDB01Delete?id=<%= favorite.get("id") %>">삭제</a></td>
 				</tr>
 				<% } %>
 			</tbody>
